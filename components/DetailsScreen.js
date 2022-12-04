@@ -9,7 +9,6 @@ import {
 
 export default function DetailsScreen({ navigation, route }) {
   const newsItem = route.params.item;
-  console.log(newsItem);
 
   return (
     <SafeAreaView style={styles.container}>

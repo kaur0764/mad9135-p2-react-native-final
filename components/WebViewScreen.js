@@ -1,20 +1,7 @@
-import { StyleSheet, Text, SafeAreaView } from 'react-native';
+import { WebView } from 'react-native-webview';
 
 export default function WebViewScreen({ route }) {
   const uri = route.params.uri;
-  return (
-    <SafeAreaView style={styles.container}>
-      <Text>WebView Screen</Text>
-      <Text>{uri}</Text>
-    </SafeAreaView>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  return <WebView source={{ uri: uri }} />;
+}
