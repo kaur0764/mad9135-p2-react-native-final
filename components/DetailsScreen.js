@@ -1,9 +1,9 @@
 import { StyleSheet, Text, SafeAreaView } from 'react-native';
 
-export default function HomeScreen() {
+export default function DetailsScreen({ route }) {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Home Screen</Text>
+      <Text>Details Screen</Text>
     </SafeAreaView>
   );
 }
