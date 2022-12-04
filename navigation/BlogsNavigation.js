@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 export default function BlogsNavigation() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Blogs" component={BlogsScreen} />
+      <Stack.Screen name="Blogs List" component={BlogsScreen} />
       <Stack.Screen name="Blog Details" component={DetailsScreen} />
       <Stack.Screen name="Blog Reader" component={WebViewScreen} />
     </Stack.Navigator>

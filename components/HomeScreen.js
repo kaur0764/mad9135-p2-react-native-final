@@ -20,7 +20,7 @@ export default function HomeScreen({ navigation }) {
           return (
             <Card
               data={item}
-              onPress={() => navigation.navigate('Details', { id: item.id })}
+              onPress={() => navigation.navigate('Details', { item: item })}
             />
           );
         }}

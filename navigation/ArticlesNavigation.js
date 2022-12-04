@@ -8,7 +8,7 @@ const Stack = createStackNavigator();
 export default function ArticlesNavigation() {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Articles" component={ArticlesScreen} />
+      <Stack.Screen name="Articles List" component={ArticlesScreen} />
       <Stack.Screen name="Article Details" component={DetailsScreen} />
       <Stack.Screen name="Article Reader" component={WebViewScreen} />
     </Stack.Navigator>
