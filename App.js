@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { NewsProvider } from './context/newsContext';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from './components/HomeScreen';
+import HomeNavigation from './navigation/HomeNavigation';
 import ArticlesNavigation from './navigation/ArticlesNavigation';
 import BlogsNavigation from './navigation/BlogsNavigation';
 
@@ -13,7 +13,11 @@ export default function App() {
     <NewsProvider>
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen
+            name="Home"
+            component={HomeNavigation}
+            options={{ headerShown: false }}
+          />
           <Tab.Screen
             name="Articles"
             component={ArticlesNavigation}
