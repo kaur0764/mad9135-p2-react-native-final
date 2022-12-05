@@ -6,14 +6,33 @@ import {
   View,
   Image,
   Button,
+  Alert,
 } from 'react-native';
+import * as FileSystem from 'expo-file-system';
+import * as MediaLibrary from 'expo-media-library';
 
 export default function DetailsScreen({ navigation, route }) {
   const newsItem = route.params.item;
 
   async function savePhoto() {
-    //TODO: Figure out how to save a photo...
-    // Probably a combination of FileSystem + MediaLibrary
+    const splitUrl = newsItem.imageUrl.split('.');
+    const extension = splitUrl[splitUrl.length - 1];
+    const [, id] = String(Math.random()).split('.');
+    const fileName = `${id}.${extension}`;
+
+    try {
+      const { uri } = await FileSystem.downloadAsync(
+        newsItem.imageUrl,
+        FileSystem.documentDirectory + fileName
+      );
+      await MediaLibrary.saveToLibraryAsync(uri);
+      Alert.alert(
+        'Image Saved',
+        'Success! The image was successfully saved to your image library.'
+      );
+    } catch (err) {
+      Alert.alert('Error', `An error occurred. ${err.message}`);
+    }
   }
 
   return (
