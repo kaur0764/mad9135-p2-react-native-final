@@ -5,10 +5,18 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeNavigation from './navigation/HomeNavigation';
 import ArticlesNavigation from './navigation/ArticlesNavigation';
 import BlogsNavigation from './navigation/BlogsNavigation';
+import * as MediaLibrary from 'expo-media-library';
+import { useEffect } from 'react';
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [, requestPermission] = MediaLibrary.usePermissions();
+
+  useEffect(() => {
+    requestPermission();
+  }, []);
+
   return (
     <NewsProvider>
       <NavigationContainer>
