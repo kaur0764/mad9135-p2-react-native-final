@@ -1,6 +1,6 @@
 import { StyleSheet, SafeAreaView, FlatList } from 'react-native';
 import { useNews } from '../context/newsContext';
-import Card from './Card';
+import NewsListItem from './NewsListItem';
 
 export default function BlogsScreen({ navigation }) {
   const [news] = useNews();
@@ -13,7 +13,7 @@ export default function BlogsScreen({ navigation }) {
       <FlatList
         data={data}
         renderItem={({ item }) => (
-          <Card
+          <NewsListItem
             data={item}
             onPress={() => navigation.navigate('Blog Details', { item: item })}
           />
@@ -27,6 +27,8 @@ export default function BlogsScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#000',
+    paddingTop: 16,
+    paddingBottom: 16,
   },
 });
