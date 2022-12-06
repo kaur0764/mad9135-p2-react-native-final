@@ -38,6 +38,7 @@ export default function HomeScreen({ navigation }) {
         renderSectionHeader={({ section }) => (
           <Text style={styles.text}>{section.title}</Text>
         )}
+        stickySectionHeadersEnabled={false}
         keyExtractor={(item) => item.id}
       />
     </SafeAreaView>
