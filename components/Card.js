@@ -18,14 +18,22 @@ export default function Card({ data, onPress }) {
 const styles = StyleSheet.create({
   container: {
     margin: 16,
-    borderRadius: 10,
+    borderRadius: 12,
+    overflow: 'hidden',
   },
   card: {
     padding: 16,
   },
-  image: { width: 300, height: 150, marginBottom: 16 },
+  image: {
+    width: 300,
+    height: 150,
+    marginBottom: 16,
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
   text: {
     fontSize: 18,
     color: '#fff',
+    textAlign: 'center',
   },
 });
