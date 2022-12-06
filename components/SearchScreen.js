@@ -3,6 +3,7 @@ import {
   StyleSheet,
   SafeAreaView,
   View,
+  Text,
   TextInput,
   Button,
   FlatList,
@@ -14,6 +15,9 @@ export default function SearchScreen({ navigation }) {
   const [news] = useNews();
   const [articles, blogs] = news;
 
+  const [message, setMessage] = useState(
+    'Search Space News for a specific topic.'
+  );
   const [searchInput, setSearchInput] = useState('');
   const [results, setResults] = useState([]);
 
@@ -28,9 +32,13 @@ export default function SearchScreen({ navigation }) {
     });
 
     const newResults = [].concat(articleResults, blogResults);
-    newResults.sort(sortByRecent);
 
-    setResults(newResults);
+    if (!newResults.length) {
+      setMessage('No results found. Please try again.');
+    } else {
+      newResults.sort(sortByRecent);
+      setResults(newResults);
+    }
   }
 
   function containsText(userInput, item) {
@@ -84,7 +92,7 @@ export default function SearchScreen({ navigation }) {
           style={styles.list}
         />
       ) : (
-        <></>
+        <Text style={styles.message}>{message}</Text>
       )}
     </SafeAreaView>
   );
@@ -93,9 +101,8 @@ export default function SearchScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // flexDirection: 'column',
-    // justifyContent: 'flex-start',
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#111',
   },
   searchContainer: {
@@ -104,6 +111,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: 80,
+    maxHeight: 100,
     backgroundColor: '#111',
   },
   input: {
@@ -122,5 +130,9 @@ const styles = StyleSheet.create({
   },
   list: {
     alignSelf: 'stretch',
+  },
+  message: {
+    fontSize: 16,
+    color: '#fff',
   },
 });
