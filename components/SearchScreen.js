@@ -10,6 +10,7 @@ import {
   Button,
   FlatList,
 } from 'react-native';
+import { BlurView } from 'expo-blur';
 import { useNews } from '../context/newsContext';
 import NewsListItem from './NewsListItem';
 
@@ -79,13 +80,15 @@ export default function SearchScreen({ navigation }) {
         style={[styles.image, StyleSheet.absoluteFill]}
       />
       <View style={styles.searchContainer}>
-        <TextInput
-          placeholder="Search space news"
-          placeholderTextColor="#fff"
-          value={searchInput}
-          onChangeText={setSearchInput}
-          style={styles.input}
-        />
+        <BlurView intensity={80} style={styles.inputContainer}>
+          <TextInput
+            placeholder="Search space news"
+            placeholderTextColor="#fff"
+            value={searchInput}
+            onChangeText={setSearchInput}
+            style={styles.input}
+          />
+        </BlurView>
         <Button
           title="Search"
           onPress={searchHandler}
@@ -136,13 +139,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     minHeight: 80,
     maxHeight: 100,
-    backgroundColor: '#111',
+  },
+  inputContainer: {
+    marginRight: 12,
+    borderRadius: 8,
+    overflow: 'hidden',
   },
   input: {
     fontSize: 16,
     height: 40,
     width: 250,
-    marginRight: 12,
     padding: 12,
     borderWidth: 1,
     borderRadius: 8,
