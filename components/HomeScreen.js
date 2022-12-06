@@ -30,7 +30,7 @@ export default function HomeScreen({ navigation }) {
       {loading ? (
         <SafeAreaView style={styles.loader}>
           <Image
-            source={require('../assets/background.jpg')}
+            source={require('../assets/homeBackground.jpg')}
             style={[styles.image, StyleSheet.absoluteFill]}
           />
           <ActivityIndicator size="large" color="#fff" />
@@ -38,7 +38,7 @@ export default function HomeScreen({ navigation }) {
       ) : (
         <SafeAreaView style={styles.container}>
           <Image
-            source={require('../assets/background.jpg')}
+            source={require('../assets/homeBackground.jpg')}
             style={[styles.image, StyleSheet.absoluteFill]}
           />
           <SectionList

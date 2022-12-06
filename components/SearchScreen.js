@@ -3,6 +3,7 @@ import {
   StyleSheet,
   SafeAreaView,
   ActivityIndicator,
+  Image,
   View,
   Text,
   TextInput,
@@ -73,6 +74,10 @@ export default function SearchScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
+      <Image
+        source={require('../assets/searchBackground.jpg')}
+        style={[styles.image, StyleSheet.absoluteFill]}
+      />
       <View style={styles.searchContainer}>
         <TextInput
           placeholder="Search space news"
@@ -91,9 +96,9 @@ export default function SearchScreen({ navigation }) {
       {results.length > 0 ? (
         <>
           {loading ? (
-            <SafeAreaView style={styles.loader}>
+            <View style={styles.loader}>
               <ActivityIndicator size="large" color="#fff" />
-            </SafeAreaView>
+            </View>
           ) : (
             <FlatList
               data={results}
@@ -148,10 +153,14 @@ const styles = StyleSheet.create({
     color: '#000',
   },
   loader: {
-    backgroundColor: '#111',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
   },
   list: {
     alignSelf: 'stretch',

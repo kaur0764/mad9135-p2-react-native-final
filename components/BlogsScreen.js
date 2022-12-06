@@ -3,6 +3,7 @@ import {
   StyleSheet,
   SafeAreaView,
   ActivityIndicator,
+  Image,
   FlatList,
 } from 'react-native';
 import { useNews } from '../context/newsContext';
@@ -26,10 +27,18 @@ export default function BlogsScreen({ navigation }) {
     <>
       {loading ? (
         <SafeAreaView style={styles.loader}>
+          <Image
+            source={require('../assets/newsBackground.jpg')}
+            style={[styles.image, StyleSheet.absoluteFill]}
+          />
           <ActivityIndicator size="large" color="#fff" />
         </SafeAreaView>
       ) : (
         <SafeAreaView style={styles.container}>
+          <Image
+            source={require('../assets/newsBackground.jpg')}
+            style={[styles.image, StyleSheet.absoluteFill]}
+          />
           <FlatList
             data={data}
             renderItem={({ item }) => (
@@ -50,13 +59,16 @@ export default function BlogsScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   loader: {
-    backgroundColor: '#111',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
+  image: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
   container: {
     flex: 1,
-    backgroundColor: '#000',
   },
 });
