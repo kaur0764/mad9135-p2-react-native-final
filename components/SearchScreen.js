@@ -19,21 +19,17 @@ export default function SearchScreen({ navigation }) {
 
   function searchHandler() {
     const userInput = searchInput.toLowerCase().trim();
-    console.log(userInput);
 
     const articleResults = articles.filter((article) => {
       return containsText(userInput, article);
     });
-
     const blogResults = blogs.filter((blog) => {
       return containsText(userInput, blog);
     });
 
-    console.log(`blogResults length: ${blogResults.length}`);
-    console.log(`articleResults length: ${articleResults.length}`);
-
     const newResults = [].concat(articleResults, blogResults);
-    console.log(newResults.length);
+    newResults.sort(sortByRecent);
+
     setResults(newResults);
   }
 
@@ -45,7 +41,17 @@ export default function SearchScreen({ navigation }) {
   }
 
   function sortByRecent(a, b) {
-    // TODO: Sort array by most recent before updating setResults state
+    const datetimeA = new Date(a.publishedAt).getTime();
+    const datetimeB = new Date(b.publishedAt).getTime();
+
+    if (datetimeA > datetimeB) {
+      return -1;
+    }
+    if (datetimeA > datetimeB) {
+      return 1;
+    }
+
+    return 0;
   }
 
   return (
