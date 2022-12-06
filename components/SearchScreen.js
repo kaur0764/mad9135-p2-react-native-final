@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   SafeAreaView,
+  ActivityIndicator,
   View,
   Text,
   TextInput,
@@ -14,6 +15,13 @@ import NewsListItem from './NewsListItem';
 export default function SearchScreen({ navigation }) {
   const [news] = useNews();
   const [articles, blogs] = news;
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  }, [loading]);
 
   const [message, setMessage] = useState(
     'Search Space News for a specific topic.'
@@ -37,6 +45,7 @@ export default function SearchScreen({ navigation }) {
       setMessage('No results found. Please try again.');
     } else {
       newResults.sort(sortByRecent);
+      setLoading(true);
       setResults(newResults);
     }
   }
@@ -80,17 +89,27 @@ export default function SearchScreen({ navigation }) {
         />
       </View>
       {results.length > 0 ? (
-        <FlatList
-          data={results}
-          renderItem={({ item }) => (
-            <NewsListItem
-              data={item}
-              onPress={() => navigation.navigate('Overview', { item: item })}
+        <>
+          {loading ? (
+            <SafeAreaView style={styles.loader}>
+              <ActivityIndicator size="large" color="#fff" />
+            </SafeAreaView>
+          ) : (
+            <FlatList
+              data={results}
+              renderItem={({ item }) => (
+                <NewsListItem
+                  data={item}
+                  onPress={() =>
+                    navigation.navigate('Overview', { item: item })
+                  }
+                />
+              )}
+              keyExtractor={(item) => item.id}
+              style={styles.list}
             />
           )}
-          keyExtractor={(item) => item.id}
-          style={styles.list}
-        />
+        </>
       ) : (
         <Text style={styles.message}>{message}</Text>
       )}
@@ -127,6 +146,12 @@ const styles = StyleSheet.create({
   },
   searchBtn: {
     color: '#000',
+  },
+  loader: {
+    backgroundColor: '#111',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   list: {
     alignSelf: 'stretch',
