@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     color: '#fff',
+    flexShrink: 1,
   },
   chevron: {
     alignSelf: 'center',
