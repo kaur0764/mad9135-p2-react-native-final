@@ -9,7 +9,7 @@ export default function SearchNavigation() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Search News" component={SearchScreen} />
-      <Stack.Screen name="Details" component={DetailsScreen} />
+      <Stack.Screen name="Overview" component={DetailsScreen} />
       <Stack.Screen name="News Reader" component={WebViewScreen} />
     </Stack.Navigator>
   );
