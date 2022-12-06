@@ -7,6 +7,7 @@ import ArticlesNavigation from './navigation/ArticlesNavigation';
 import BlogsNavigation from './navigation/BlogsNavigation';
 import * as MediaLibrary from 'expo-media-library';
 import { useEffect } from 'react';
+import SearchNavigation from './navigation/SearchNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -34,6 +35,11 @@ export default function App() {
           <Tab.Screen
             name="Blogs"
             component={BlogsNavigation}
+            options={{ headerShown: false }}
+          />
+          <Tab.Screen
+            name="Search"
+            component={SearchNavigation}
             options={{ headerShown: false }}
           />
         </Tab.Navigator>
