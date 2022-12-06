@@ -4,12 +4,17 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function NewsListItem({ data, onPress }) {
+  const date = new Date(data.publishedAt).toDateString().split(' ');
+  date.shift();
+  const publishedDate = date.join(' ');
+
   return (
     <Pressable onPress={onPress}>
       <LinearGradient colors={['#555', '#333', '#111']} style={styles.listItem}>
+        <Image source={{ uri: data.imageUrl }} style={styles.image} />
         <View style={styles.dataContainer}>
-          <Image source={{ uri: data.imageUrl }} style={styles.image} />
           <Text style={styles.text}>{data.title}</Text>
+          <Text style={styles.date}>{publishedDate}</Text>
         </View>
         <Ionicons
           name={'chevron-forward-outline'}
@@ -26,7 +31,8 @@ const styles = StyleSheet.create({
   listItem: {
     flex: 1,
     flexDirection: 'row',
-    padding: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 10,
     marginTop: 8,
     marginBottom: 8,
     marginLeft: 16,
@@ -36,7 +42,7 @@ const styles = StyleSheet.create({
   },
   dataContainer: {
     flex: 1,
-    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   image: {
     width: 80,
@@ -47,8 +53,15 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
+    fontWeight: 'bold',
     color: '#fff',
     flexShrink: 1,
+  },
+  date: {
+    fontSize: 14,
+    color: '#fff',
+    fontStyle: 'italic',
+    paddingTop: 8,
   },
   chevron: {
     alignSelf: 'center',
