@@ -7,12 +7,12 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   FlatList,
 } from 'react-native';
 import { BlurView } from 'expo-blur';
 import { useNews } from '../context/newsContext';
 import NewsListItem from './NewsListItem';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function SearchScreen({ navigation }) {
   const [news] = useNews();
@@ -79,23 +79,17 @@ export default function SearchScreen({ navigation }) {
         source={require('../assets/searchBackground.jpg')}
         style={[styles.image, StyleSheet.absoluteFill]}
       />
-      <View style={styles.searchContainer}>
-        <BlurView intensity={80} style={styles.inputContainer}>
-          <TextInput
-            placeholder="Search space news"
-            placeholderTextColor="#fff"
-            value={searchInput}
-            onChangeText={setSearchInput}
-            style={styles.input}
-          />
-        </BlurView>
-        <Button
-          title="Search"
-          onPress={searchHandler}
-          style={styles.searchBtn}
-          color="#fff"
+      <BlurView intensity={80} style={styles.searchContainer}>
+        <TextInput
+          placeholder="Search space news"
+          placeholderTextColor="#fff"
+          cursorColor="#fff"
+          value={searchInput}
+          onChangeText={setSearchInput}
+          style={styles.input}
+          onSubmitEditing={() => searchHandler()}
         />
-      </View>
+      </BlurView>
       {results.length > 0 ? (
         <>
           {loading ? (
@@ -119,7 +113,12 @@ export default function SearchScreen({ navigation }) {
           )}
         </>
       ) : (
-        <Text style={styles.message}>{message}</Text>
+        <LinearGradient
+          colors={['transparent', '#555', 'transparent']}
+          style={styles.messageContainer}
+        >
+          <Text style={styles.message}>{message}</Text>
+        </LinearGradient>
       )}
     </SafeAreaView>
   );
@@ -133,15 +132,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#111',
   },
   searchContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: 80,
-    maxHeight: 100,
-  },
-  inputContainer: {
-    marginRight: 12,
+    marginBottom: 32,
     borderRadius: 8,
     overflow: 'hidden',
   },
@@ -154,9 +145,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     color: '#fff',
     borderColor: '#fff',
-  },
-  searchBtn: {
-    color: '#000',
   },
   loader: {
     flex: 1,
@@ -171,8 +159,13 @@ const styles = StyleSheet.create({
   list: {
     alignSelf: 'stretch',
   },
+  messageContainer: {
+    padding: 32,
+    width: '100%',
+  },
   message: {
     fontSize: 16,
     color: '#fff',
+    textAlign: 'center',
   },
 });
