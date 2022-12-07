@@ -28,27 +28,32 @@ export default function SearchScreen({ navigation }) {
   const [message, setMessage] = useState(
     'Search Space News for a specific topic.'
   );
+  const [error, setError] = useState('');
   const [searchInput, setSearchInput] = useState('');
   const [results, setResults] = useState([]);
 
   function searchHandler() {
     const userInput = searchInput.toLowerCase().trim();
-
-    const articleResults = articles.filter((article) => {
-      return containsText(userInput, article);
-    });
-    const blogResults = blogs.filter((blog) => {
-      return containsText(userInput, blog);
-    });
-
-    const newResults = [].concat(articleResults, blogResults);
-
-    if (!newResults.length) {
-      setMessage('No results found. Please try again.');
+    if (!userInput) {
+      setError('Please enter a search keyword');
     } else {
-      newResults.sort(sortByRecent);
-      setLoading(true);
-      setResults(newResults);
+      setError('');
+      const articleResults = articles.filter((article) => {
+        return containsText(userInput, article);
+      });
+      const blogResults = blogs.filter((blog) => {
+        return containsText(userInput, blog);
+      });
+
+      const newResults = [].concat(articleResults, blogResults);
+
+      if (!newResults.length) {
+        setMessage('No results found. Please try again.');
+      } else {
+        newResults.sort(sortByRecent);
+        setLoading(true);
+        setResults(newResults);
+      }
     }
   }
 
@@ -79,17 +84,20 @@ export default function SearchScreen({ navigation }) {
         source={require('../assets/searchBackground.jpg')}
         style={[styles.image, StyleSheet.absoluteFill]}
       />
-      <BlurView intensity={80} style={styles.searchContainer}>
-        <TextInput
-          placeholder="Search space news"
-          placeholderTextColor="#fff"
-          cursorColor="#fff"
-          value={searchInput}
-          onChangeText={setSearchInput}
-          style={styles.input}
-          onSubmitEditing={() => searchHandler()}
-        />
-      </BlurView>
+      <View styles={styles.searchContainer}>
+        <BlurView intensity={80} style={styles.inputContainer}>
+          <TextInput
+            placeholder="Search space news"
+            placeholderTextColor="#fff"
+            cursorColor="#fff"
+            value={searchInput}
+            onChangeText={setSearchInput}
+            style={[styles.input, { borderColor: error ? 'red' : '#fff' }]}
+            onSubmitEditing={() => searchHandler()}
+          />
+        </BlurView>
+        <Text style={styles.error}>{error}</Text>
+      </View>
       {results.length > 0 ? (
         <>
           {loading ? (
@@ -133,6 +141,8 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     marginBottom: 32,
+  },
+  inputContainer: {
     borderRadius: 8,
     overflow: 'hidden',
   },
@@ -144,7 +154,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     color: '#fff',
-    borderColor: '#fff',
+  },
+  error: {
+    color: 'red',
+    paddingLeft: 12,
   },
   loader: {
     flex: 1,
