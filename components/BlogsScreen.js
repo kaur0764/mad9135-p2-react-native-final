@@ -21,7 +21,6 @@ export default function BlogsScreen({ navigation }) {
           <NewsListItem
             data={item}
             onPress={() => navigation.navigate('Blog Details', { item: item })}
-            setLoading={setLoading}
           />
         )}
         keyExtractor={(item) => item.id}
