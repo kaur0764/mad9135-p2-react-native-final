@@ -22,7 +22,7 @@ export default function SearchScreen({ navigation }) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 1000);
   }, [loading]);
 
   const [message, setMessage] = useState(
