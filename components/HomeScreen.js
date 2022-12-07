@@ -17,7 +17,7 @@ export default function HomeScreen({ navigation }) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 1000);
   }, [loading]);
 
   if (news.length === 0) {
