@@ -12,7 +12,7 @@ export default function BlogsScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <Image
-        source={require('../assets/newsBackground.jpg')}
+        source={require('../assets/newsBackground.jpeg')}
         style={[styles.image, StyleSheet.absoluteFill]}
       />
       <FlatList

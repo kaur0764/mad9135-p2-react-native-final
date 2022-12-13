@@ -81,7 +81,7 @@ export default function SearchScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <Image
-        source={require('../assets/searchBackground.jpg')}
+        source={require('../assets/searchBackground.jpeg')}
         style={[styles.image, StyleSheet.absoluteFill]}
       />
       <View styles={styles.searchContainer}>
