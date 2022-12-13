@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#111',
+    paddingTop: 10,
   },
   searchContainer: {
     marginBottom: 32,
