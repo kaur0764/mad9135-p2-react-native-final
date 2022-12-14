@@ -9,6 +9,33 @@
 
 For our final project in MAD9135 - JavaScript Application Development, we are making a Space News mobile application. This app aggregates the most recent article and blog posts related to human spaceflight endeavors.
 
+## Components & APIs used
+
+### React Native APIs 
+
+- Alert
+- StyleSheet
+- WebView
+
+### React Native core components
+
+- View
+- Text
+- Image
+- FlatList
+- Pressable
+- SafeAreaView
+- StatusBar
+- TextInput
+- ActivityIndicator
+
+### Expo Components & APIs
+
+- BlurView
+- LinearGradient
+- FileSystem
+- MediaLibrary
+
 ## Requirements
 
 - You must include ALL the following [React Native core components](https://reactnative.dev/docs/components-and-apis):
