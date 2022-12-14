@@ -5,8 +5,8 @@ import {
   ScrollView,
   View,
   Image,
-  Button,
   Alert,
+  Pressable,
 } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
@@ -46,19 +46,27 @@ export default function DetailsScreen({ navigation, route }) {
               uri: newsItem.imageUrl,
             }}
           />
-          <Button title="Save Photo" onPress={savePhoto} />
+          <Pressable onPress={savePhoto}>
+            <Text style={styles.saveBtnText}>Save Photo</Text>
+          </Pressable>
         </View>
         <View style={styles.summaryContainer}>
           <Text style={styles.summary}>{newsItem.summary}</Text>
           <Text style={styles.source}>Source: {newsItem.newsSite}</Text>
         </View>
-        <Button
-          title="Read More"
-          accessibilityLabel="Read the full news item"
+        <Pressable
           onPress={() =>
             navigation.navigate('News Reader', { uri: newsItem.url })
           }
-        />
+          style={({ pressed }) => [
+            {
+              backgroundColor: pressed ? '#999' : '#fff',
+            },
+            styles.buttonContainer,
+          ]}
+        >
+          <Text style={styles.readMoreButtonText}>Read More</Text>
+        </Pressable>
       </ScrollView>
     </SafeAreaView>
   );
@@ -67,15 +75,17 @@ export default function DetailsScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#111',
   },
   scrollContainer: {
-    backgroundColor: '#fff',
+    backgroundColor: '#111',
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingHorizontal: 20,
     paddingBottom: 15,
   },
   title: {
+    color: '#fff',
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -84,19 +94,41 @@ const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
     alignItems: 'flex-start',
+    gap: 8,
   },
   image: {
     width: 325,
     height: 244,
     borderRadius: 10,
   },
+  saveBtnText: {
+    color: '#fff',
+    padding: 6,
+    fontSize: 16,
+    textDecorationLine: 'underline',
+  },
+  buttonContainer: {
+    borderColor: '#fff',
+    borderWidth: 2,
+    borderStyle: 'solid',
+    borderRadius: 5,
+    overflow: 'hidden',
+  },
+  readMoreButtonText: {
+    color: '#111',
+    padding: 6,
+    fontSize: 16,
+    fontWeight: 'Bold',
+  },
   summaryContainer: {
     paddingVertical: 15,
   },
   summary: {
+    color: '#fff',
     fontSize: 18,
   },
   source: {
+    color: '#fff',
     fontStyle: 'italic',
     marginTop: 8,
   },

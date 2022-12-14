@@ -81,7 +81,7 @@ export default function SearchScreen({ navigation }) {
   return (
     <SafeAreaView style={styles.container}>
       <Image
-        source={require('../assets/searchBackground.jpg')}
+        source={require('../assets/searchBackground.jpeg')}
         style={[styles.image, StyleSheet.absoluteFill]}
       />
       <View styles={styles.searchContainer}>
@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#111',
+    paddingTop: 10,
   },
   searchContainer: {
     marginBottom: 32,
